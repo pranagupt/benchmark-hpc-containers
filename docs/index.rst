@@ -13,7 +13,7 @@ Subheadingsayguide
    
    indexfile1
    indexfile2
-   :caption: Contents:
+   
 
 
 
