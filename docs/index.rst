@@ -1,8 +1,12 @@
 Welcome to benchmark-containers's documentation!
 ================================================
 
-Subheadingsayguide
-^^^^^^^^^^^^^^^^^^
+This documentation describes the process of installing, configuring, 
+and optimising HPL and STREAM benchmarks on your system, whether it is
+your laptop, or a much more powerful High Performace Computer.
+
+Index:
+^^^^^^
 .. toctree::
    :maxdepth: 3
    
