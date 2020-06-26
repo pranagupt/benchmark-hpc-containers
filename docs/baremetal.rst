@@ -22,7 +22,7 @@ and can be enabled with the ``-fopenmp`` flag while compiling. You can thus comp
     $ gcc -O -DSTREAM_ARRAY_SIZE=10000000 stream.c -o stream_bin
 
 Now, the ``-DSTREAM_ARRAY_SIZE`` is set to ``10000000``. However, you must set it as per your system's 
-cache size. Look at the optimisation section for details.
+cache size. Look at the optimisation section (:ref:`STREAM-optimisation`) for details.
 
 Running the STREAM binary
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -106,7 +106,7 @@ This might take several minutes, at the end of which a ``bin`` folder containing
     HPL.dat    xhpl
 
 The ``HPL.dat`` file contains all the inputs which need to be changed according to your system's architecture.
-Refer to the optimisation section for more details.
+Refer to the optimisation section (:ref:`HPL-optimisation`) for more details.
 You can then run the executable as follows::
 
     $ /opt/openmpi-4.0.4/bin/mpirun -np NUM_OF_CORES xhpl
