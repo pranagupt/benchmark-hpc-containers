@@ -18,7 +18,7 @@ import sphinx_rtd_theme
 
 # -- Project information -----------------------------------------------------
 
-project = 'benchmark-containers'
+project = 'benchmarking-an-hpc'
 copyright = '2020, Pranav Gupta, Aryaman Bhagat'
 author = 'Pranav Gupta, Aryaman Bhagat'
 
