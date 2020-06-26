@@ -1,4 +1,4 @@
-`Welcome to benchmark-containers's documentation!
+Welcome to benchmark-containers's documentation!
 ================================================
 
 Subheadingsayguide
