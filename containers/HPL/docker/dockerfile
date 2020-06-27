@@ -1,19 +1,44 @@
-FROM ashael/openmpi
-MAINTAINER Eduardo Arango <carlos.arango.gutierrez@correounivalle.edu.co>
+FROM ubuntu
 
 RUN apt-get update
 RUN apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev
-RUN apt-get install -y libopenmpi-dev openmpi-common openmpi-bin openmpi-doc libatlas3-base libatlas-base-dev libatlas-dev libatlas-doc
-RUN wget http://www.netlib.org/benchmark/hpl/hpl-2.2.tar.gz
-RUN tar -xvf hpl-2.2.tar.gz -C /usr/local/
+apt-transport-https
+
+#MKL prep
+WORKDIR /tmp
+# now get the key:
+RUN wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+# now install that key
+RUN apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+# now remove the public key file exit the root shell
+RUN rm GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+
+RUN apt-get update
+
+#MKL
+RUN apt-get install -y intel-mkl-2019.5-075
+
+#openMPI
+RUN wget 'https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.4.tar.gz' 
+RUN tar -xvzf openmpi-4.0.4.tar.gz
+RUN rm openmpi-4.0.4.tar.gz
+WORKDIR openmpi-4.0.4
+RUN ./configure --prefix=/usr/local/openmpi-4.0.4
+RUN make all install
+RUN export PATH=$PATH:/usr/local/openmpi-4.0.4/bin
+RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/openmpi-4.0.4/lib
+
+#HPL
+RUN wget http://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz
+RUN tar -xvf hpl-2.3.tar.gz -C /usr/local/
 RUN mkdir -p /home/benchmark
 
-WORKDIR /usr/local/hpl-2.2/
-RUN wget --no-check-certificate https://raw.githubusercontent.com/remyd1/containers-benchs/master/linpack/HPL/defs_dockerfiles/dockerfile/HPLtemplate.dat
-#ADD HPLtemplate.dat /usr/local/hpl-2.2
+WORKDIR /usr/local/hpl-2.3/
+RUN wget --no-check-certificate https://github.com/pranagupt/benchmark-hpc-containers/blob/master/Make.Linux_Intel64
+#ADD Make.Linux_Intel64 /usr/local/hpl-2.2
 
-RUN sed -i 's|$(LN_S) $(TOPdir)/Make.$(arch) Make.inc|$(LN_S) /usr/local/hpl-2.2/Make.$(arch) Make.inc|' Make.top
-RUN mv HPLtemplate.dat Make.Linux
+RUN sed -i 's|$(LN_S) $(TOPdir)/Make.$(arch) Make.inc|$(LN_S) /usr/local/hpl-2.3/Make.$(arch) Make.inc|' Make.top
+RUN mv Make.Linux_Intel64 Make.Linux
 
 RUN make arch=Linux clean_arch_all
 RUN make arch=Linux
