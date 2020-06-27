@@ -93,7 +93,7 @@ export "LD_LIBRARY_PATH=/usr/local/openmpi-4.0.4/lib/libmpi.so:$LD_LIBRARY_PATH"
 # header files,  LAlib  is defined  to be the name of  the library to be
 # used. The variable LAdir is only used for defining LAinc and LAlib.
 #
-LAdir        = /usr/bin/mkl
+LAdir        = /opt/intel/mkl
 LAinc        = -I$(LAdir)/include -DMKL_ILP64 -m64
 LAlib        = -Wl,--start-group $(LAdir)/lib/intel64/libmkl_intel_ilp64.a $(LAdir)/lib/intel64/libmkl_gnu_thread.a $(LAdir)/lib/intel64/libmkl_core.a -Wl,--end-group -lgomp -lpthread -lm -ldl
 #
