@@ -4,7 +4,6 @@ IncludeCmd: yes
 
 %post
         apt-get update
-        apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev
         cd /usr/local
 	
 	#install mkl
@@ -39,6 +38,8 @@ IncludeCmd: yes
 	source $HOME/.bashrc
 
 	
+        apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev
+
 	wget https://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz
         tar -xvf hpl-2.3.tar.gz
         mkdir -p /home/benchmark
