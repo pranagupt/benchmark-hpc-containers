@@ -1,0 +1,49 @@
+BootStrap: docker
+From: ubuntu:16.04
+IncludeCmd: yes
+
+%post
+        sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
+        apt-get update
+        apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev
+        cd /usr/local
+	
+	#install mkl
+	cd /tmp
+	# now get the key:
+	wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+	# now install that key
+	apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+	# now remove the public key file 
+	rm GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
+	
+	cd /usr/local
+
+	#adding apt repository for intelMKL
+	sudo wget https://apt.repos.intel.com/setup/intelproducts.list -O /etc/apt/sources.list.d/intelproducts.list
+	
+	#install intel MKL library, this can be changed as needed
+	apt install intel-mkl-2019.5-075
+
+	#install openMPI
+	wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.4.tar.gz	
+	tar -xvzf openmpi-4.0.4.tar.gz
+	rm openmpi-4.0.4.tar.gz
+	cd openmpi-4.0.4
+	./configure --prefix=/usr/local/openmpi-4.0.4
+	make all install
+	echo "export PATH=$PATH:/usr/local/openmpi-4.0.4/bin" >> $HOME/.bashrc
+	echo "export
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/openmpi-4.0.4/lib" >> $HOME/.bashrc
+	source $HOME/.bashrc
+
+	
+	wget https://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz
+        tar -xvf hpl-2.3.tar.gz
+        mkdir -p /home/benchmark
+        ln -s /usr/local/hpl-2.3 /home/benchmark/hpl
+        cd /usr/local/hpl-2.3
+        wget 'https://raw.githubusercontent.com/pranagupt/benchmark-hpc-containers/master/docs/Make.Intel_Linux64' -O Make.Linux
+
+        make arch=Linux clean_arch_all
+        make arch=Linux
