@@ -6,7 +6,7 @@ IncludeCmd: yes
         cd /usr/local
         sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
 	apt-get update
-        apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev
+        apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev apt-transport-https
 
 	#install mkl
 	cd /tmp
@@ -21,6 +21,7 @@ IncludeCmd: yes
         wget https://apt.repos.intel.com/setup/intelproducts.list -O /etc/apt/sources.list.d/intelproducts.list
 	
 	
+        sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
 	apt-get update
 
 	#MKL
@@ -33,13 +34,12 @@ IncludeCmd: yes
 	cd openmpi-4.0.4
 	./configure --prefix=/usr/local/openmpi-4.0.4
 	make all install
-	echo "export PATH=$PATH:/usr/local/openmpi-4.0.4/bin" >> $HOME/.bashrc
-	echo "export
-	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/openmpi-4.0.4/lib" >> $HOME/.bashrc
-	source $HOME/.bashrc
+	export PATH=$PATH:/usr/local/openmpi-4.0.4/bin
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/openmpi-4.0.4/lib
 
 	
 	#HPL
+	cd /usr/local
 	wget https://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz
         tar -xvf hpl-2.3.tar.gz
         mkdir -p /home/benchmark
