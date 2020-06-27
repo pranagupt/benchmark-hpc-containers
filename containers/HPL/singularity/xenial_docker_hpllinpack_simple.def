@@ -21,7 +21,8 @@ IncludeCmd: yes
         wget https://apt.repos.intel.com/setup/intelproducts.list -O /etc/apt/sources.list.d/intelproducts.list
 	
 	
-	
+	apt-get update
+
 	#MKL
 	apt-get install -y intel-mkl-2019.5-075
 
