@@ -1,5 +1,4 @@
 FROM ubuntu
-MAINTAINER Eduardo Arango <carlos.arango.gutierrez@correounivalle.edu.co>
 
 # Build the basics 
 RUN apt-get update
