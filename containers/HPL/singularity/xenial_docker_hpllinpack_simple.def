@@ -4,7 +4,10 @@ IncludeCmd: yes
 
 %post
         cd /usr/local
-	
+        sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
+	apt-get update
+        apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev
+
 	#install mkl
 	cd /tmp
 	# now get the key:
@@ -17,11 +20,7 @@ IncludeCmd: yes
 	#adding apt repository for intelMKL
         wget https://apt.repos.intel.com/setup/intelproducts.list -O /etc/apt/sources.list.d/intelproducts.list
 	
-        sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
 	
-	#some dependencies
-	apt-get update
-        apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev
 	
 	#MKL
 	apt-get install -y intel-mkl-2019.5-075
