@@ -3,7 +3,6 @@ From: ubuntu:16.04
 IncludeCmd: yes
 
 %post
-        apt-get update
         cd /usr/local
 	
 	#install mkl
@@ -14,18 +13,20 @@ IncludeCmd: yes
 	apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
 	# now remove the public key file 
 	rm GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
-	
-	cd /usr/local
-
+    	cd /usr/local
 	#adding apt repository for intelMKL
         wget https://apt.repos.intel.com/setup/intelproducts.list -O /etc/apt/sources.list.d/intelproducts.list
 	
         sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
-	#install intel MKL library, this can be changed as needed
+	
+	#some dependencies
 	apt-get update
+        apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev
+	
+	#MKL
 	apt-get install -y intel-mkl-2019.5-075
 
-	#install openMPI
+	#openMPI
 	wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.4.tar.gz	
 	tar -xvzf openmpi-4.0.4.tar.gz
 	rm openmpi-4.0.4.tar.gz
@@ -38,8 +39,7 @@ IncludeCmd: yes
 	source $HOME/.bashrc
 
 	
-        apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev
-
+	#HPL
 	wget https://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz
         tar -xvf hpl-2.3.tar.gz
         mkdir -p /home/benchmark
