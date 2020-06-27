@@ -67,7 +67,7 @@ ARCH         = x86_64
 # - HPL Directory Structure / HPL library ------------------------------
 # ----------------------------------------------------------------------
 #
-TOPdir       = /root/hpl
+TOPdir       = /usr/local/hpl-2.3
 INCdir       = $(TOPdir)/include
 BINdir       = $(TOPdir)/bin/$(ARCH)
 LIBdir       = $(TOPdir)/lib/$(ARCH)
@@ -81,10 +81,10 @@ HPLlib       = $(LIBdir)/libhpl.a
 # header files,  MPlib  is defined  to be the name of  the library to be
 # used. The variable MPdir is only used for defining MPinc and MPlib.
 #
-MPdir        = /opt/openmpi-4.0.4
+MPdir        = /usr/local/openmpi-4.0.4
 MPinc        = -I$(MPdir)/include
 MPlib        = $(MPdir)/lib/libmpi.so
-export "LD_LIBRARY_PATH=/opt/openmpi-4.0.4/lib/libmpi.so:$LD_LIBRARY_PATH"
+export "LD_LIBRARY_PATH=/usr/local/openmpi-4.0.4/lib/libmpi.so:$LD_LIBRARY_PATH"
 #
 # ----------------------------------------------------------------------
 # - Linear Algebra library (BLAS or VSIPL) -----------------------------
@@ -167,7 +167,7 @@ HPL_DEFS     = $(F2CDEFS) $(HPL_OPTS) $(HPL_INCLUDES)
 # - Compilers / linkers - Optimization flags ---------------------------
 # ----------------------------------------------------------------------
 #
-CC           = /opt/openmpi-4.0.4/bin/mpicc -lgomp -fopenmp
+CC           = /usr/local/openmpi-4.0.4/bin/mpicc -lgomp -fopenmp
 CCNOOPT      = $(HPL_DEFS)
 CCFLAGS      = $(HPL_DEFS) -O2
 #
