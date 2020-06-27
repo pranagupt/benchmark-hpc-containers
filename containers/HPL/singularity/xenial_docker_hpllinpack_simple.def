@@ -20,10 +20,11 @@ IncludeCmd: yes
 	cd /usr/local
 
 	#adding apt repository for intelMKL
-	sudo wget https://apt.repos.intel.com/setup/intelproducts.list -O /etc/apt/sources.list.d/intelproducts.list
+        wget https://apt.repos.intel.com/setup/intelproducts.list -O /etc/apt/sources.list.d/intelproducts.list
 	
 	#install intel MKL library, this can be changed as needed
-	apt install intel-mkl-2019.5-075
+	apt-get update
+	apt-get install -y intel-mkl-2019.5-075
 
 	#install openMPI
 	wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.4.tar.gz	

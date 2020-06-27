@@ -84,7 +84,7 @@ HPLlib       = $(LIBdir)/libhpl.a
 MPdir        = /usr/local/openmpi-4.0.4
 MPinc        = -I$(MPdir)/include
 MPlib        = $(MPdir)/lib/libmpi.so
-export "LD_LIBRARY_PATH=/opt/openmpi-4.0.4/lib/libmpi.so:$LD_LIBRARY_PATH"
+export "LD_LIBRARY_PATH=/usr/local/openmpi-4.0.4/lib/libmpi.so:$LD_LIBRARY_PATH"
 #
 # ----------------------------------------------------------------------
 # - Linear Algebra library (BLAS or VSIPL) -----------------------------
