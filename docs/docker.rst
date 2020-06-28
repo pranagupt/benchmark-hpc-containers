@@ -1,38 +1,44 @@
 Running Benchmarks in Docker Containers
 =======================================
 
-dockerfiles are definitiion files for docker. 
+Dockerfiles are definition files for building docker containers. 
 Container images can be built from these files using rudimentary docker
 commands.
-he images for these files can be found at containers/HPL/docker and
-containers/memeorySTREAM/singularity for HPL and STREAM benchmark respectively
+The images for these files can be found in the 
+`pranagupt/benchmark-hpc-containers <https://github.com/pranagupt/benchmark-hpc-containers>`_ github repository 
+at ``containers/HPL/docker`` and ``containers/memorySTREAM/docker`` 
+for HPL and STREAM benchmark respectively.
 
-to create and run a STREAM image named streamdocker
+.. note::
 
-cd containers/memorySTREAM/docker
+    To know more about docker, refer the documentation at https://docs.docker.com/.
 
-sudo docker build --tag streamdocker .
+Running STREAM in Docker
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run the image using
+To create and run a STREAM image named ``streamdocker``::
 
-sudo docker run -it streamdocker /bin/bash
+    $ cd containers/memorySTREAM/docker
+    $ sudo docker build --tag streamdocker .
 
-now run the stream benchmark using stream_benchmark
+Run the image using::
 
-To build and run a HPL image named hpldocker
+    $ sudo docker run -it streamdocker /bin/bash
 
-cd containers/HPL/docker
+Now run the stream benchmark using::
+    $ stream_benchmark
 
-sudo docker build --tag hpldocker .
+Running HPL in Docker
+^^^^^^^^^^^^^^^^^^^^^
 
-sudo docker run -it hpldocker /bin/bash
+To build and run a HPL image named ``hpldocker``::
 
-now you are inside the docker image
+    $ cd containers/HPL/docker
+    $ sudo docker build --tag hpldocker .
+    $ sudo docker run -it hpldocker /bin/bash
 
-you will see the xhpl executable and HPL.dat
+Now you are inside the docker image. You will see the ``xhpl`` executable and ``HPL.dat``
+Configure the ``HPL.dat`` as needed. Refer to the optimisation section (:ref:`HPL-optimisation`) to know more about configuring ``HPL.dat``.
+Run the HPL benchmark using::
 
-configure the HPL.dat as needed
-
-run the HPL benchmark using
-
-mpirun -np <NO_OF_PROCCES> xhpl
+    $ mpirun -np <NO_OF_PROCESSES> xhpl

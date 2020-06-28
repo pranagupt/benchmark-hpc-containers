@@ -1,41 +1,59 @@
 Running Benchmarks in Singularity Containers
 ============================================
-.def files are definition files for singularity.
+The definition files for singularity containers are .def files.
 Container images can be built form these files using rudimentary singularity commands.
-The images for these files can be found at containers/memorySTREAM/singularity
-for STREAM benchmark and at containers/HPL/singularity for HPL benchmark.
+The images for these files can be found at in the github repository 
+`pranagupt/benchmark-hpc-containers <https://github.com/pranagupt/benchmark-hpc-containers>`_ 
+at ``containers/memorySTREAM/singularity``.
+for STREAM benchmark and at ``containers/HPL/singularity`` for HPL benchmark.
 
-To create and run a STREAM image named STREAM.simg(replace as needed)
+.. note::
 
-cd containers/memorySTREAM/singularity
+    To know more about singularity, refer the documentation at https://sylabs.io/docs/
 
-sudo singularity build STREAM.simg xenial_stream.def
-(explore -remote and --false-root flags if sudo privilege is not available)
+Running STREAM in Singularity
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-run the container using 
+To create and run a STREAM image named ``STREAM.simg`` (or another name)::
 
-./STREAM.simg
+    $ cd containers/memorySTREAM/singularity
+    $ sudo singularity build STREAM.simg xenial_stream.def
 
-run the stream benchmark using
-stream_benchmark
 
-To create and run an HPL image named HPL.simg(replace as needed)
+.. note::
 
-cd containers/HPL/singularity
+    Explore ``-remote`` and ``--false-root`` flags if sudo privilege is not available. 
+    Refer the documentation at https://sylabs.io/docs/
 
-sudo singularity build HPL.simg xenial_docker_hpllinpack_simple.def
 
-to run the container
-./HPL.simg
-now you are inside the container
-navigate to the directory with HPL in it
+Run the container using::
 
-cd /usr/local/hpl-2.3/bin/linux
+    $ ./STREAM.simg
 
-now you will find th xhpl executable and HPL.dat cconfiguration file
+Run the stream benchmark using
+    $ ./stream_benchmark
 
-edit the HPL.dat according to your needs and run the HPL benchmark using
+Running HPL in Singularity
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-mpirun -np <NO_OF_PROCCESES> xhpl
+To create and run an HPL image named ``HPL.simg`` (or another name)::
+
+    $ cd containers/HPL/singularity
+    $ sudo singularity build HPL.simg xenial_docker_hpllinpack_simple.def
+
+To run the container::
+    
+    $ ./HPL.simg
+
+Now you are inside the container. Navigate to the directory with HPL in it::
+
+    $ cd /usr/local/hpl-2.3/bin/linux
+
+Now you will find the ``xhpl`` executable and ``HPL.dat`` configuration file.
+Edit the ``HPL.dat`` according to your needs. 
+Refer to the optimisation section (:ref:`HPL-optimisation`) to know more about configuring ``HPL.dat``. 
+Run the HPL benchmark using::
+
+    $ mpirun -np <NO_OF_PROCCESES> xhpl
 
 
