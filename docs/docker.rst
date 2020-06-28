@@ -5,8 +5,7 @@ Running Benchmarks in Docker Containers
 
 Dockerfiles are definition files for building docker containers. 
 Container images can be built from these files using rudimentary docker
-commands.
-The images for these files can be found in the 
+commands. These definition files can be found in 
 `pranagupt/benchmark-hpc-containers <https://github.com/pranagupt/benchmark-hpc-containers>`_ github repository 
 at ``containers/HPL/docker`` and ``containers/memorySTREAM/docker`` 
 for HPL and STREAM benchmark respectively.
@@ -28,7 +27,8 @@ Run the image using::
     $ sudo docker run -it streamdocker /bin/bash
 
 Now run the stream benchmark using::
-    $ stream_benchmark
+    
+    $ ./stream_benchmark
 
 To get the best results, modify the flag ``-DSTREAM_ARRAY_SIZE=VAL`` (replace VAL with the required value) in the ``gcc`` line 
 in the ``dockerfile`` file before building the image. 

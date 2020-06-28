@@ -4,7 +4,7 @@ Running Benchmarks in Singularity Containers
 ============================================
 The definition files for singularity containers are .def files.
 Container images can be built form these files using rudimentary singularity commands.
-The images for these files can be found at in the github repository 
+These definition files can be found in the github repository 
 `pranagupt/benchmark-hpc-containers <https://github.com/pranagupt/benchmark-hpc-containers>`_ 
 at ``containers/memorySTREAM/singularity``.
 for STREAM benchmark and at ``containers/HPL/singularity`` for HPL benchmark.
