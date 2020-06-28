@@ -30,6 +30,12 @@ Run the image using::
 Now run the stream benchmark using::
     $ stream_benchmark
 
+To get the best results, modify the flag ``-DSTREAM_ARRAY_SIZE=VAL`` (replace VAL with the required value) in the ``gcc`` line 
+in the ``dockerfile`` file before building the image. 
+Refer to the optimisation section for details (:ref:`HPL-optimisation`).
+The environment variable OMP_NUM_THREADS allows runtime control of the 
+number of threads/cores used when the resulting "stream_omp" program is executed.
+
 Running HPL in Docker
 ^^^^^^^^^^^^^^^^^^^^^
 
