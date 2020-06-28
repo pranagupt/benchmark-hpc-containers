@@ -6,7 +6,5 @@ The ``containers`` folder contains Dockerfiles and .def files from which Docker 
 
 * The latest version of this documentation is available at https://benchmark-hpc-containers.readthedocs.io.
 
-* The associated repository pranagupt/benchmark-hpc-containers is located on Github.
-
-* Please send a pull request or open an issue on the Github repository if you wish to contribute or point out any errors.
+* Please send a pull request or open an issue if you wish to contribute or point out any errors.
 
