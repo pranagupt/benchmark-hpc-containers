@@ -1,8 +1,7 @@
-FROM ubuntu
+FROM ubuntu:18.04
 
 RUN apt-get update
-RUN apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev
-apt-transport-https
+RUN apt-get install -y bash wget build-essential gcc time libc6-dev libgcc-5-dev apt-transport-https
 
 #MKL prep
 WORKDIR /tmp
@@ -12,12 +11,13 @@ RUN wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCT
 RUN apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
 # now remove the public key file exit the root shell
 RUN rm GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB
-
+RUN wget https://apt.repos.intel.com/setup/intelproducts.list -O /etc/apt/sources.list.d/intelproducts.list
 RUN apt-get update
 
 #MKL
 RUN apt-get install -y intel-mkl-2019.5-075
 
+WORKDIR /usr/local
 #openMPI
 RUN wget 'https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.4.tar.gz' 
 RUN tar -xvzf openmpi-4.0.4.tar.gz
@@ -28,21 +28,23 @@ RUN make all install
 RUN export PATH=$PATH:/usr/local/openmpi-4.0.4/bin
 RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/openmpi-4.0.4/lib
 
+WORKDIR /usr/local
 #HPL
 RUN wget http://www.netlib.org/benchmark/hpl/hpl-2.3.tar.gz
 RUN tar -xvf hpl-2.3.tar.gz -C /usr/local/
 RUN mkdir -p /home/benchmark
+RUN ln -s /usr/local/hpl-2.3 /home/benchmark/hpl
 
 WORKDIR /usr/local/hpl-2.3/
-RUN wget --no-check-certificate https://github.com/pranagupt/benchmark-hpc-containers/blob/master/Make.Linux_Intel64
+RUN wget https://raw.githubusercontent.com/pranagupt/benchmark-hpc-containers/master/Make.Linux_Intel64 -O Make.Linux
 #ADD Make.Linux_Intel64 /usr/local/hpl-2.2
+#RUN mv Make.Linux_Intel64 Make.Linux
 
 RUN sed -i 's|$(LN_S) $(TOPdir)/Make.$(arch) Make.inc|$(LN_S) /usr/local/hpl-2.3/Make.$(arch) Make.inc|' Make.top
-RUN mv Make.Linux_Intel64 Make.Linux
 
 RUN make arch=Linux clean_arch_all
 RUN make arch=Linux
 
-WORKDIR /usr/local/hpl-2.2/bin/Linux
+WORKDIR /usr/local/hpl-2.3/bin/Linux
 
 CMD bash

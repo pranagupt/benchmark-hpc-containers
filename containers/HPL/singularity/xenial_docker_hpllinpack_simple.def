@@ -49,3 +49,7 @@ IncludeCmd: yes
 	sed -i 's|$(LN_S) $(TOPdir)/Make.$(arch) Make.inc|$(LN_S) /usr/local/hpl-2.3/Make.$(arch) Make.inc|' Make.top
         make arch=Linux clean_arch_all
         make arch=Linux
+	
+	cd /usr/local
+	rm hpl-2.3.tar.gz
+	cd hpl-2.3/bin/Linux
