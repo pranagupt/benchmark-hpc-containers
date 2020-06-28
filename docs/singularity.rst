@@ -1,3 +1,5 @@
+.. _Singularity:
+
 Running Benchmarks in Singularity Containers
 ============================================
 The definition files for singularity containers are .def files.

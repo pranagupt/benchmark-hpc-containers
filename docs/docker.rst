@@ -1,3 +1,5 @@
+.. _Docker:
+
 Running Benchmarks in Docker Containers
 =======================================
 

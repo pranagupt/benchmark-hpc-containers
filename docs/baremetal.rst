@@ -1,3 +1,5 @@
+.. _Baremetal:
+
 Baremetal
 =========
 
